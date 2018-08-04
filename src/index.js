@@ -1,8 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import axios from 'axios'
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+import './components/index.css'
+
+import Root from './components/Root'
+
+
+axios.defaults.baseURL = process.env.REACT_APP_HOST_API
+
+ReactDOM.render(<Root />, document.getElementById('root'))
