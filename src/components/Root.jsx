@@ -1,16 +1,19 @@
+import App from 'components/App/App'
 import React from 'react'
 import {hot} from 'react-hot-loader'
 import {Provider} from 'react-redux'
-import App from './App'
+import BrowserRouter from 'react-router-dom/BrowserRouter'
 
-import store from '../store'
+import store from 'store'
 
 
 class Root extends React.Component {
   render () {
     return (
       <Provider store={store}>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </Provider>
     )
   }

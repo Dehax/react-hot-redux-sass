@@ -3,7 +3,7 @@
   "rules": {
     "indent": ["error", 2, {"SwitchCase": 1}],
     "linebreak-style": "off",
-    "quotes": ["error", "single"],
+    "quotes": ["error", "single", {"allowTemplateLiterals": true}],
     "semi": ["error", "never"]
   }
 }
