@@ -1,6 +1,6 @@
 {
   "name": "react-hot-redux-sass",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "React (hot reload) + Redux + SASS template based on create-react-app.",
   "private": true,
   "scripts": {
