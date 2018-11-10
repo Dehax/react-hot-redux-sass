@@ -5,7 +5,7 @@ const primaryColor = '#ffffff'
 const secondaryColor = '#f62a55'
 const backgroundColor = '#f6f7fb'
 
-export default createMuiTheme({
+export const light = createMuiTheme({
   palette: {
     type: 'light',
     primary: {
@@ -21,5 +21,6 @@ export default createMuiTheme({
   typography: {
     fontSize: 16,
     htmlFontSize: 10,
+    useNextVariants: true,
   },
 })

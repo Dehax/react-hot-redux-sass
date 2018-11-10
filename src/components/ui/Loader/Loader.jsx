@@ -1,14 +1,13 @@
 import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress'
 import Typography from '@material-ui/core/Typography/Typography'
 import classNames from 'classnames'
-import * as strings from 'languages/en'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import './Loader.css'
+import './Loader.sass'
 
 
-class Loader extends React.Component {
+class Loader extends React.PureComponent {
   render () {
     const {
       className,
@@ -19,7 +18,7 @@ class Loader extends React.Component {
         <Typography
           gutterBottom
         >
-          {strings.LOADING}
+          Loading...
         </Typography>
         <div className="Progress">
           <CircularProgress color="secondary" />
@@ -31,9 +30,6 @@ class Loader extends React.Component {
 
 Loader.propTypes = {
   className: PropTypes.string,
-}
-Loader.defaultProps = {
-  className: '',
 }
 
 export default Loader

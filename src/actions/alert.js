@@ -1,6 +1,6 @@
 import httpStatus from 'http-status'
-import * as accountActions from './account'
-import * as ActionTypes from './types'
+import * as ActionTypes from 'actions/ActionTypes'
+import * as accountActions from 'actions/account'
 
 
 export const error = (err) => {
@@ -39,13 +39,28 @@ export const error = (err) => {
       errObj.message = `Application error (${err.message}). Please, reload the page and contact the developer.`
     }
     
-    await dispatch({
+    dispatch({
       type: ActionTypes.ALERT__FAILURE,
       error: errObj,
     })
   }
 }
 
-export const request = () => ({
-  type: ActionTypes.ALERT__REQUEST,
+export const warn = (message) => ({
+  type: ActionTypes.ALERT__WARNING,
+  message,
+})
+
+export const info = (message) => ({
+  type: ActionTypes.ALERT__INFORMATION,
+  message,
+})
+
+export const success = (message) => ({
+  type: ActionTypes.ALERT__SUCCESS,
+  message,
+})
+
+export const clear = () => ({
+  type: ActionTypes.ALERT__CLEAR,
 })

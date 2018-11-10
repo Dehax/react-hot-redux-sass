@@ -15,6 +15,5 @@ class Root extends React.Component {
 }
 
 Root.propTypes = {}
-Root.defaultProps = {}
 
 export default hot(module)(Root)

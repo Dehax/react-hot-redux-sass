@@ -1,7 +1,9 @@
 // Alert
-export const ALERT__REQUEST = Symbol('ALERT__REQUEST')
-export const ALERT__SUCCESS = Symbol('ALERT__SUCCESS')
-export const ALERT__FAILURE = Symbol('ALERT__FAILURE')
+export const ALERT__CLEAR = 'ALERT__CLEAR'
+export const ALERT__FAILURE = 'ALERT__FAILURE'
+export const ALERT__WARNING = 'ALERT__WARNING'
+export const ALERT__INFORMATION = 'ALERT__INFORMATION'
+export const ALERT__SUCCESS = 'ALERT__SUCCESS'
 
 // Account
 export const SIGNUP__REQUEST = Symbol('SIGNUP__REQUEST')

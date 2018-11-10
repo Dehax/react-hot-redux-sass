@@ -16,6 +16,5 @@ class PageRouter extends React.Component {
 }
 
 PageRouter.propTypes = {}
-PageRouter.defaultProps = {}
 
 export default PageRouter

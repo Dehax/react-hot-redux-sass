@@ -1,5 +1,5 @@
 import axios from 'axios'
-import 'components/index.css'
+import 'components/index.sass'
 import Root from 'components/Root'
 import React from 'react'
 import ReactDOM from 'react-dom'

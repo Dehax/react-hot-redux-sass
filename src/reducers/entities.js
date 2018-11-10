@@ -1,6 +1,7 @@
-import * as ActionTypes from 'actions/types'
+import * as ActionTypes from 'actions/ActionTypes'
 import * as models from 'models'
 import {normalize} from 'normalizr'
+import merge from 'lodash/merge'
 
 
 const initialState = {
@@ -17,13 +18,7 @@ export default (state = initialState, action) => {
         },
       )
       
-      return {
-        ...state,
-        users: {
-          ...state.users,
-          ...entities.users,
-        },
-      }
+      return merge({}, state, entities)
     }
     case ActionTypes.LOGOUT__SUCCESS:
       return initialState

@@ -1,4 +1,4 @@
-import * as ActionTypes from 'actions/types'
+import * as ActionTypes from 'actions/ActionTypes'
 import * as models from 'models'
 import {normalize} from 'normalizr'
 

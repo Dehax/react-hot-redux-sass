@@ -1,134 +1,222 @@
-import IconButton from '@material-ui/core/IconButton/IconButton'
 import Snackbar from '@material-ui/core/Snackbar/Snackbar'
-import SnackbarContent from '@material-ui/core/SnackbarContent/SnackbarContent'
-import withStyles from '@material-ui/core/styles/withStyles'
-import Close from '@material-ui/icons/Close'
-import Error from '@material-ui/icons/Error'
-import classNames from 'classnames'
-import PropTypes from 'prop-types'
+import AlertContent from 'components/popups/Alert/AlertContent/AlertContent'
 import React from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import * as selectors from 'selectors/alert'
-import * as types from 'types'
+import * as alertSelectors from 'selectors/alert'
 
 
-const styles = theme => ({
-  error: {
-    backgroundColor: theme.palette.error.dark,
-  },
-  icon: {
-    fontSize: 20,
-  },
-  iconVariant: {
-    opacity: 0.9,
-    marginRight: theme.spacing.unit,
-  },
-  message: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-})
-
-class Alert extends React.Component {
+class Alert extends React.PureComponent {
   constructor (props) {
     super(props)
     
     this.state = {
-      open: false,
+      openError: false,
+      openWarn: false,
+      openInfo: false,
+      openSuccess: false,
       lastError: null,
+      lastWarn: null,
+      lastInfo: null,
+      lastSuccess: null,
     }
-    
-    this.handleClose = this.handleClose.bind(this)
+  
+    this.handleCloseError = this.handleCloseError.bind(this)
+    this.handleCloseWarn = this.handleCloseWarn.bind(this)
+    this.handleCloseInfo = this.handleCloseInfo.bind(this)
+    this.handleCloseSuccess = this.handleCloseSuccess.bind(this)
   }
   
   static getDerivedStateFromProps (props, state) {
     const {
       error,
+      warn,
+      info,
+      success,
     } = props
     
     const {
       lastError,
+      lastWarn,
+      lastInfo,
+      lastSuccess,
     } = state
     
+    let result = null
+    
     if (error !== lastError) {
-      return {
-        open: !!error,
+      result = {
+        ...result,
+        openError: !!error,
         lastError: error,
       }
     }
     
-    return null
+    if (warn !== lastWarn) {
+      result = {
+        ...result,
+        openWarn: !!warn,
+        lastWarn: warn,
+      }
+    }
+    
+    if (info !== lastInfo) {
+      result = {
+        ...result,
+        openInfo: !!info,
+        lastInfo: info,
+      }
+    }
+    
+    if (success !== lastSuccess) {
+      result = {
+        ...result,
+        openSuccess: !!success,
+        lastSuccess: success,
+      }
+    }
+    
+    return result
   }
   
-  handleClose (event, reason) {
+  handleCloseError (event, reason) {
     if (reason === 'clickaway') {
       return
     }
     
     this.setState({
-      open: false,
+      openError: false,
+    })
+  }
+  
+  handleCloseWarn (event, reason) {
+    if (reason === 'clickaway') {
+      return
+    }
+    
+    this.setState({
+      openWarn: false,
+    })
+  }
+  
+  handleCloseInfo (event, reason) {
+    if (reason === 'clickaway') {
+      return
+    }
+    
+    this.setState({
+      openInfo: false,
+    })
+  }
+  
+  handleCloseSuccess (event, reason) {
+    if (reason === 'clickaway') {
+      return
+    }
+    
+    this.setState({
+      openSuccess: false,
     })
   }
   
   render () {
     const {
-      open,
+      openError,
+      openWarn,
+      openInfo,
+      openSuccess,
     } = this.state
     
     const {
-      classes,
       error,
+      warn,
+      info,
+      success,
     } = this.props
     
     return (
-      <Snackbar
-        key={Date.now()}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={this.handleClose}
-      >
-        <SnackbarContent
-          className={classes.error}
-          aria-describedby="message-id"
-          message={
-            <span
-              id="message-id"
-              className={classes.message}
-            >
-              <Error className={classNames(classes.icon, classes.iconVariant)} />
-              {error && error.message}
-            </span>
-          }
-          action={[
-            <IconButton
-              key="close"
-              aria-label="Close"
-              color="inherit"
-              onClick={this.handleClose}
-            >
-              <Close className={classes.icon} />
-            </IconButton>,
-          ]}
-        />
-      </Snackbar>
+      <React.Fragment>
+        <Snackbar
+          key={`error-${Date.now()}`}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          open={openError}
+          autoHideDuration={6000}
+          onClose={this.handleCloseError}
+        >
+          <AlertContent
+            variant="error"
+            message={error ? error.message : ''}
+            onClose={this.handleCloseError}
+          />
+        </Snackbar>
+        <Snackbar
+          key={`warn-${Date.now()}`}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={openWarn}
+          autoHideDuration={6000}
+          onClose={this.handleCloseWarn}
+        >
+          <AlertContent
+            variant="warning"
+            message={warn ? warn.message : ''}
+            onClose={this.handleCloseWarn}
+          />
+        </Snackbar>
+        <Snackbar
+          key={`info-${Date.now()}`}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'left',
+          }}
+          open={openInfo}
+          autoHideDuration={6000}
+          onClose={this.handleCloseInfo}
+        >
+          <AlertContent
+            variant="info"
+            message={info ? info.message : ''}
+            onClose={this.handleCloseInfo}
+          />
+        </Snackbar>
+        <Snackbar
+          key={`success-${Date.now()}`}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={openSuccess}
+          autoHideDuration={6000}
+          onClose={this.handleCloseSuccess}
+        >
+          <AlertContent
+            variant="success"
+            message={success ? success.message : ''}
+            onClose={this.handleCloseSuccess}
+          />
+        </Snackbar>
+      </React.Fragment>
     )
   }
 }
 
 Alert.propTypes = {
-  classes: PropTypes.object.isRequired,
-  error: types.errorType,
-}
-Alert.defaultProps = {
-  error: null,
+  error: PropTypes.shape({message: PropTypes.string.isRequired}),
+  warn: PropTypes.shape({message: PropTypes.string.isRequired}),
+  info: PropTypes.shape({message: PropTypes.string.isRequired}),
+  success: PropTypes.shape({message: PropTypes.string.isRequired}),
 }
 
 const mapStateToProps = state => ({
-  error: selectors.getErrorObject(state),
+  error: alertSelectors.getError(state),
+  warn: alertSelectors.getWarn(state),
+  info: alertSelectors.getInfo(state),
+  success: alertSelectors.getSuccess(state),
 })
 
-export default connect(mapStateToProps)(withStyles(styles)(Alert))
+export default connect(mapStateToProps)(Alert)

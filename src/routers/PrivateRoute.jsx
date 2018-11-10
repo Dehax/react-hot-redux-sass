@@ -41,9 +41,6 @@ PrivateRoute.propTypes = {
   loginPath: PropTypes.string,
   loggedIn: PropTypes.bool.isRequired,
 }
-PrivateRoute.defaultProps = {
-  loginPath: `/login`,
-}
 
 const mapStateToProps = (state) => ({
   loggedIn: selectors.getIsLoggedIn(state),

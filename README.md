@@ -1,3 +1,3 @@
-# react-hot-redux-sass
+# react-spa-template
 
-React (hot reload) + Redux + SASS template based on create-react-app.
+React single-page application template based on create-react-app.

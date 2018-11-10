@@ -1,4 +1,4 @@
-import * as ActionTypes from 'actions/types'
+import * as ActionTypes from 'actions/ActionTypes'
 
 
 const email = localStorage.getItem('email')

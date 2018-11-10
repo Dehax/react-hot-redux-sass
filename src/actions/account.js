@@ -1,5 +1,5 @@
 import * as alertActions from 'actions/alert'
-import * as ActionTypes from 'actions/types'
+import * as ActionTypes from 'actions/ActionTypes'
 import * as accountApi from 'api/account'
 
 
